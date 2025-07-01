@@ -3,7 +3,7 @@
 using namespace std;
 
 int main() {
-    
+
     int t;
     cin >> t;
     while (t--) {
@@ -15,17 +15,20 @@ int main() {
             cin >> a[i];
         }
 
-        // a[j - 1] lowest and k = 1 then NO, else YES
-        int mini = a[0];
+        if (k >= 2) {
+            cout << "YES" << endl;
+            continue;
+        }
+        int maxi = a[0];
         for (int i = 0; i < n; i++) {
-            mini = min(mini, a[i]);
+            maxi = max(maxi, a[i]);
         }
 
-        if (a[j - 1] == mini && k == 1) {
-            cout << "NO" << endl;
+        if (a[j - 1] == maxi && k == 1) {
+            cout << "YES" << endl;
         }
         else {
-            cout << "YES" << endl;
+            cout << "NO" << endl;
         }
 
     }
