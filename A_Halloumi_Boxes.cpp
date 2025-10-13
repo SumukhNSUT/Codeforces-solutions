@@ -20,7 +20,7 @@ int main() {
         bool isSorted = is_sorted(v.begin(), v.end());
 
         if (isSorted) {
-            cout << "YES" << '\n';
+            cout << "NO" << '\n';
             continue;
         }
 
