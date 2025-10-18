@@ -36,27 +36,33 @@ template<class T> inline void chmax(T& a, const T& b) { if (a < b) a = b; }
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
+
     int t;
-    if (!(cin >> t)) return 0;
+    cin >> t;
     while (t--) {
         int n;
         cin >> n;
+        vector<int> a(n);
+        for (int i = 0; i < n; i++) cin >> a[i];
 
-        vector<int> v(n);
-        for (int i = 0; i < n; i++) {
-            cin >> v[i];
+        int total2 = 0;
+        for (int x : a) if (x == 2) total2++;
+
+        if (total2 % 2 != 0) {  // odd number of 2’s => impossible
+            cout << -1 << "\n";
+            continue;
         }
-        int cnt = 0;
+
+        int half = total2 / 2, cnt = 0, ans = -1;
         for (int i = 0; i < n - 1; i++) {
-            if ((v[i] % 2 != 0 && v[i + 1] % 2 != 0) || (v[i] % 2 == 0) && (v[i + 1] % 2 == 0)) {
-                // agar same parity hai toh
-                cnt++;
-
-                v[i + 1] = v[i] * v[i + 1];
-
+            if (a[i] == 2) cnt++;
+            if (cnt == half) {
+                ans = i + 1; // 1-based index
+                break;
             }
         }
-        cout << cnt << endl;
+
+        cout << ans << "\n";
     }
     return 0;
 }

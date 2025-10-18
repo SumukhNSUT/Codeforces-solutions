@@ -39,24 +39,34 @@ int main() {
     int t;
     if (!(cin >> t)) return 0;
     while (t--) {
-        int n;
+        long long n;
         cin >> n;
 
-        vector<int> v(n);
-        for (int i = 0; i < n; i++) {
-            cin >> v[i];
-        }
-        int cnt = 0;
-        for (int i = 0; i < n - 1; i++) {
-            if ((v[i] % 2 != 0 && v[i + 1] % 2 != 0) || (v[i] % 2 == 0) && (v[i + 1] % 2 == 0)) {
-                // agar same parity hai toh
-                cnt++;
-
-                v[i + 1] = v[i] * v[i + 1];
-
+        vector<long long> divisors;
+        for (long long i = 1; i * i <= n; ++i) {
+            if (n % i == 0) {
+                divisors.push_back(i);
+                if (i != n / i) {
+                    divisors.push_back(n / i);
+                }
             }
         }
-        cout << cnt << endl;
+
+        sort(divisors.begin(), divisors.end());
+
+        int maxi = 1, len = 1;
+        for (int i = 1; i < (int)divisors.size(); i++) {
+            if (divisors[i] == divisors[i - 1] + 1) {
+                len++;
+            }
+            else {
+                len = 1;
+            }
+            maxi = max(maxi, len);
+        }
+
+        cout << maxi << "\n";
+
     }
     return 0;
 }

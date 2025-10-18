@@ -43,20 +43,31 @@ int main() {
         cin >> n;
 
         vector<int> v(n);
+
         for (int i = 0; i < n; i++) {
             cin >> v[i];
         }
-        int cnt = 0;
-        for (int i = 0; i < n - 1; i++) {
-            if ((v[i] % 2 != 0 && v[i + 1] % 2 != 0) || (v[i] % 2 == 0) && (v[i + 1] % 2 == 0)) {
-                // agar same parity hai toh
-                cnt++;
 
-                v[i + 1] = v[i] * v[i + 1];
+        int cnt0 = 0;
+        int cntm1 = 0; // -1 count
 
-            }
+        for (int i = 0; i < n; i++) {
+            if (v[i] == 0)cnt0++;
+            if (v[i] == -1)cntm1++;
         }
-        cout << cnt << endl;
+
+        int ans = 0;
+        ans += cnt0;
+
+        if (cntm1 % 2 == 0) {
+            cout << ans << endl;
+            continue;
+        }
+        else {
+            ans += 2;
+            cout << ans << endl;
+            continue;
+        }
     }
     return 0;
 }

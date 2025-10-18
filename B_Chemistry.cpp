@@ -39,24 +39,28 @@ int main() {
     int t;
     if (!(cin >> t)) return 0;
     while (t--) {
-        int n;
-        cin >> n;
+        int n, k;
+        cin >> n >> k;
 
-        vector<int> v(n);
+        string str;
+        cin >> str;
+
+        unordered_map<char, int> freq;
         for (int i = 0; i < n; i++) {
-            cin >> v[i];
+            freq[str[i]]++;
         }
         int cnt = 0;
-        for (int i = 0; i < n - 1; i++) {
-            if ((v[i] % 2 != 0 && v[i + 1] % 2 != 0) || (v[i] % 2 == 0) && (v[i + 1] % 2 == 0)) {
-                // agar same parity hai toh
+        for (auto it : freq) {
+            if (it.second % 2 != 0) {
                 cnt++;
-
-                v[i + 1] = v[i] * v[i + 1];
-
             }
         }
-        cout << cnt << endl;
+        // 1 character ho skta hai with odd freq
+        if (cnt > k + 1) { cout << "NO" << endl; }
+        else {
+            cout << "YES\n";
+        }
+
     }
     return 0;
 }

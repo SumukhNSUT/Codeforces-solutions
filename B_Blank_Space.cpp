@@ -29,9 +29,9 @@
 #include <random>
 using namespace std;
 
-#define all(x) (x).begin(), (x).end()
-template<class T> inline void chmin(T& a, const T& b) { if (b < a) a = b; }
-template<class T> inline void chmax(T& a, const T& b) { if (a < b) a = b; }
+// #define all(x) (x).begin(), (x).end()
+// template<class T> inline void chmin(T& a, const T& b) { if (b < a) a = b; }
+// template<class T> inline void chmax(T& a, const T& b) { if (a < b) a = b; }
 
 int main() {
     ios::sync_with_stdio(false);
@@ -46,17 +46,20 @@ int main() {
         for (int i = 0; i < n; i++) {
             cin >> v[i];
         }
-        int cnt = 0;
-        for (int i = 0; i < n - 1; i++) {
-            if ((v[i] % 2 != 0 && v[i + 1] % 2 != 0) || (v[i] % 2 == 0) && (v[i + 1] % 2 == 0)) {
-                // agar same parity hai toh
-                cnt++;
 
-                v[i + 1] = v[i] * v[i + 1];
-
+        int maxi = 0;
+        int len = 0;
+        for (int i = 0; i < n; i++) {
+            if (v[i] == 0) {
+                len++;
             }
+            else {
+                len = 0;
+            }
+
+            maxi = max(maxi, len);
         }
-        cout << cnt << endl;
+        cout << maxi << endl;
     }
     return 0;
 }

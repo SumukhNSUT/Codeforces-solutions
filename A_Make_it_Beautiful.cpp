@@ -36,27 +36,31 @@ template<class T> inline void chmax(T& a, const T& b) { if (a < b) a = b; }
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
+
     int t;
     if (!(cin >> t)) return 0;
     while (t--) {
         int n;
         cin >> n;
-
         vector<int> v(n);
-        for (int i = 0; i < n; i++) {
-            cin >> v[i];
-        }
-        int cnt = 0;
-        for (int i = 0; i < n - 1; i++) {
-            if ((v[i] % 2 != 0 && v[i + 1] % 2 != 0) || (v[i] % 2 == 0) && (v[i + 1] % 2 == 0)) {
-                // agar same parity hai toh
-                cnt++;
+        for (int i = 0; i < n; i++) cin >> v[i];
 
-                v[i + 1] = v[i] * v[i + 1];
+        // Sort array
+        sort(v.begin(), v.end());
 
-            }
+        // If all elements are equal → impossible
+        if (v.front() == v.back()) {
+            cout << "NO\n";
+            continue;
         }
-        cout << cnt << endl;
+
+        // Reverse and adjust to avoid prefix sum conflicts
+        reverse(v.begin(), v.end());
+        if (v.size() >= 3) swap(v[1], v.back());
+
+        cout << "YES\n";
+        for (int x : v) cout << x << " ";
+        cout << "\n";
     }
     return 0;
 }

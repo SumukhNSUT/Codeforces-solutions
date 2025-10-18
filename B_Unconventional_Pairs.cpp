@@ -43,20 +43,17 @@ int main() {
         cin >> n;
 
         vector<int> v(n);
-        for (int i = 0; i < n; i++) {
+        for (int i = 0;i < n; i++) {
             cin >> v[i];
         }
-        int cnt = 0;
-        for (int i = 0; i < n - 1; i++) {
-            if ((v[i] % 2 != 0 && v[i + 1] % 2 != 0) || (v[i] % 2 == 0) && (v[i + 1] % 2 == 0)) {
-                // agar same parity hai toh
-                cnt++;
 
-                v[i + 1] = v[i] * v[i + 1];
-
-            }
+        sort(v.begin(), v.end());
+        int maxi = 0;
+        for (int i = 0; i <= v.size() - 2; i++) {
+            maxi = max(maxi, abs(v[i] - v[i + 1]));
+            i++;
         }
-        cout << cnt << endl;
+        cout << maxi << endl;
     }
     return 0;
 }

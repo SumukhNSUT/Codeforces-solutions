@@ -32,31 +32,23 @@ using namespace std;
 #define all(x) (x).begin(), (x).end()
 template<class T> inline void chmin(T& a, const T& b) { if (b < a) a = b; }
 template<class T> inline void chmax(T& a, const T& b) { if (a < b) a = b; }
-
 int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
     int t;
-    if (!(cin >> t)) return 0;
+    cin >> t;
     while (t--) {
         int n;
         cin >> n;
-
-        vector<int> v(n);
-        for (int i = 0; i < n; i++) {
-            cin >> v[i];
+        vector<int> ans;
+        for (int i = 1; i <= n; i++) {
+            char x;
+            cin >> x;
+            if (x - '0' == 1) ans.push_back(i);
         }
-        int cnt = 0;
-        for (int i = 0; i < n - 1; i++) {
-            if ((v[i] % 2 != 0 && v[i + 1] % 2 != 0) || (v[i] % 2 == 0) && (v[i + 1] % 2 == 0)) {
-                // agar same parity hai toh
-                cnt++;
-
-                v[i + 1] = v[i] * v[i + 1];
-
-            }
+        cout << ans.size() << endl;
+        for (auto it : ans) {
+            cout << it << " ";
         }
-        cout << cnt << endl;
+        cout << endl;
     }
     return 0;
 }

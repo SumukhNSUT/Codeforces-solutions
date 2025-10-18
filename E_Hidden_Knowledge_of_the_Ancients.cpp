@@ -39,23 +39,31 @@ int main() {
     int t;
     if (!(cin >> t)) return 0;
     while (t--) {
-        int n;
-        cin >> n;
+        int n, k, l, r;
+        cin >> n >> k >> l >> r;
 
         vector<int> v(n);
         for (int i = 0; i < n; i++) {
             cin >> v[i];
         }
         int cnt = 0;
-        for (int i = 0; i < n - 1; i++) {
-            if ((v[i] % 2 != 0 && v[i + 1] % 2 != 0) || (v[i] % 2 == 0) && (v[i + 1] % 2 == 0)) {
-                // agar same parity hai toh
-                cnt++;
+        for (int i = l; i <= r; i++) {
+            int size = i;
+            unordered_map<int, int> freq;
 
-                v[i + 1] = v[i] * v[i + 1];
+            // Sliding window of size `size`
+            for (int start = 0; start + size - 1 < n; start++) {
+                freq.clear();
+                for (int j = start; j < start + size; j++) {
+                    freq[v[j]]++;
 
+                }
+                // Do something with freq here if needed
+                if (freq.size() == k)cnt++;
             }
+
         }
+
         cout << cnt << endl;
     }
     return 0;

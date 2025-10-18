@@ -33,30 +33,44 @@ using namespace std;
 template<class T> inline void chmin(T& a, const T& b) { if (b < a) a = b; }
 template<class T> inline void chmax(T& a, const T& b) { if (a < b) a = b; }
 
+long long calc(char c, const string& str) {
+    int n = str.size();
+    vector<int> pos;
+
+    // store positions of character c
+    for (int i = 0; i < n; i++)
+        if (str[i] == c) pos.push_back(i);
+
+    int k = pos.size();
+    if (k <= 1) return 0LL;
+
+    // shift positions
+    for (int i = 0; i < k; i++)
+        pos[i] -= i;
+
+    long long median = pos[k / 2];
+    long long cost = 0;
+    for (int x : pos)
+        cost += abs(x - median);
+
+    return cost;
+}
+
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
+
     int t;
-    if (!(cin >> t)) return 0;
+    cin >> t;
     while (t--) {
         int n;
         cin >> n;
 
-        vector<int> v(n);
-        for (int i = 0; i < n; i++) {
-            cin >> v[i];
-        }
-        int cnt = 0;
-        for (int i = 0; i < n - 1; i++) {
-            if ((v[i] % 2 != 0 && v[i + 1] % 2 != 0) || (v[i] % 2 == 0) && (v[i + 1] % 2 == 0)) {
-                // agar same parity hai toh
-                cnt++;
+        string str;
+        cin >> str;
 
-                v[i + 1] = v[i] * v[i + 1];
-
-            }
-        }
-        cout << cnt << endl;
+        long long ans = min(calc('a', str), calc('b', str));
+        cout << ans << "\n";
     }
     return 0;
 }
