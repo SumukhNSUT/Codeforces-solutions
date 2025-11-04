@@ -27,32 +27,38 @@
 #include <chrono>
 #include <random>
 using namespace std;
-int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
 
-    int t;
-    if (!(cin >> t)) return 0;
-    while (t--) {
+int main()
+{
+    long long t;
+    cin >> t; // Read the number of test cases
+
+    while (t--)
+    {
         long long n;
-        cin >> n;
+        cin >> n; // Read the total number of wheels for the current test case
 
-        long long mini = -1;
-        long long maxi = -1;
+        // If the number of wheels is less than 4 or odd, it's impossible to form buses
+        if (n < 4 || n % 2 == 1)
+            cout << -1 << '\n'; // Output -1 indicating no valid configuration
+        else
+        {
+            // Using a different formula for ceil to avoid floating point operations
+            // in C++20 (GCC 13-64) version
 
+            // Calculate the minimum number of buses using 6-wheel buses
+            long long min_buses = (n + 5) / 6; // integer ceil of n/6
 
-        if (n % 2 == 0) {
-            maxi = n / 4;
-            mini = (n + 5) / 6;
-        }
+            // Calculate the maximum number of buses using 4-wheel buses
+            long long max_buses = n / 4;       // integer floor of n/4
 
-        if (mini == -1 && maxi == -1) {
-            cout << -1 << "\n";
-        }
-        else {
-            cout << mini << " " << maxi << "\n";
+            // Output the minimum and maximum number of buses
+            cout << min_buses << " " << max_buses << '\n';
         }
     }
 
     return 0;
 }
+
+// Time Complexity (TC): O(1)
+// Space Complexity (SC): O(1)
